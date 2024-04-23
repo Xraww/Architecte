@@ -1,0 +1,81 @@
+/* Log In */
+body {
+    background-color: #FFFEF8;
+    margin: 0;
+	max-width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 99vh;
+}
+
+header {
+	margin: 50px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    
+    flex-grow: 1;
+}
+
+main h1 {
+    text-align: center;
+    color: #1D6154;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+main form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 35%; 
+}
+
+.submit-and-forget {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.submit-and-forget a {
+    text-align: center;
+    color: #3D3D3D;
+}
+
+input[type="email"], input[type="password"] {
+    font-size: 20px;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+    margin: 0;
+}
+
+input {
+    border: none;
+    box-shadow: 0px 4px 14px 0px #00000017;
+    height: 40px;
+    padding: 5px;
+}
+
+footer {
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: white;
+
+    flex-shrink: 0;
+}
