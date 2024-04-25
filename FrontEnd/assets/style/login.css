@@ -9,16 +9,13 @@ body {
     height: 99vh;
 }
 
-header {
-	margin: 50px;
-}
-
 main {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    
     flex-grow: 1;
+    width: 100%;
+	margin: auto;
 }
 
 main h1 {

@@ -34,7 +34,7 @@ async function worksFilters() {
     // Création du container des bouttons
     const buttonsDiv = document.createElement("div");
     buttonsDiv.classList.add("filters-buttons")
-    const elementBefore = document.querySelector("#portfolio h2")
+    const elementBefore = document.querySelector("#portfolio .title-and-edit")
 
     // Ajout de ma division juste après le h2
     if (elementBefore) {
@@ -87,3 +87,53 @@ function showWorkByCategory(category) {
 
 displayWorks();
 worksFilters();
+
+////// MODALE //////
+
+document.querySelector(".title-and-edit button").addEventListener("click", () => {
+    getWorksImages();
+    document.querySelector(".modal-container").style.display = "flex";
+})
+
+const modalCloseTriggers = document.querySelectorAll(".modal-trigger");
+
+modalCloseTriggers.forEach(function(trigger) { 
+    trigger.addEventListener("click", () => { 
+        document.querySelector(".modal-container").style.display = "none";
+    })
+})
+
+const getWorksImages = function() {
+    let images =  [];
+
+    fetch("http://localhost:5678/api/works").then(works => works.json()).then(data => {
+        data.forEach(function(work) {
+            images.push(work.imageUrl);
+        })
+
+        modalWorksImages(images);
+    })
+}
+
+const modalWorksImages = function(imagesList) {
+    document.querySelector(".modal-container").style.display = "flex";
+    const photosContainer = document.querySelector(".photo-list");
+    photosContainer.innerHTML = "";
+
+    imagesList.forEach(function(img) {
+        let card = document.createElement("div");
+        let photo = document.createElement("img");
+        let iconContainer = document.createElement("div");
+        let trashIcon = document.createElement("i");
+
+        card.classList.add("photo-card");
+        photo.src = img;
+        trashIcon.classList.add("fa-solid", "fa-trash-can");
+        iconContainer.classList.add("icon-container");
+
+        card.appendChild(photo);
+        card.appendChild(iconContainer);
+        iconContainer.appendChild(trashIcon);
+        photosContainer.appendChild(card);
+    })
+}
