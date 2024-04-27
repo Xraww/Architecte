@@ -230,11 +230,15 @@ main {
 	flex-direction: column;
 }
 
-#contact input {
+#contact input, .input-area input, #photo-category {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.input-area input {
+    padding: 0 10px;
 }
 
 #contact label {
@@ -246,7 +250,7 @@ main {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"], #addImgButton {
+input[type="submit"], #add-img-button {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -284,33 +288,54 @@ footer nav ul {
 }
 
 .modal {
-    min-width: 300px;
-    max-width: 500px;
+    width: 630px;
+    height: 670px;
 
-    padding: 30px;
     background: white;
     border-radius: 10px;
     z-index: 1;
 }
 
-.cross-close {
+.modal-head {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+#add-photo-view .modal-head {
+    justify-content: space-between;
+}
+
+.head-icon {
     border: none;
     background-color: white;
     padding: 0;
-    font-size: 24px;
+    font-size: 22px;
     cursor: pointer;
 }
 
-.modal-close {
-    display: flex;
-    justify-content: flex-end;
-}
-
 .modal-content {
+    padding: 0 30px 30px 30px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
+
+    /* border: 1px solid blue; */
+}
+
+/* Modal view 2 : Ad Photo */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+
+    padding-bottom: 30px;
+    border-bottom: 1px solid #B3B3B3;
+
+    /* border: 1px solid red; */
 }
 
 h3 {
@@ -320,17 +345,18 @@ h3 {
 
 .photo-list {
     width: 80%;
-    max-height: 50vh;
+    /* max-height: 50vh; */
     overflow-y: auto;
 
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 
+    padding-right: 5px;
     padding-bottom: 50px;
     border-bottom: 1px solid #B3B3B3;
 
-    padding-right: 5px;
+    /* border: 1px solid red; */
 }
 
 .photo-card {
@@ -366,12 +392,62 @@ h3 {
     font-size: 10px;
 }
 
-#addImgButton {
+#add-img-button {
     padding: 10px;
     margin: 0;
     border: none;
     cursor: pointer;
 }
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+.upload-photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    background-color: #E8F1F6;
+    width: 100%;
+    height: 170px;
+}
+
+.upload-photo label {
+    background-color: #CBD6DC;
+    color: #306685;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+
+    text-align: center;
+    width: 30%;
+}
+
+.upload-photo i {
+    color: #B9C5CC;
+    font-size: 60px;
+}
+
+.upload-photo p {
+    font-size: 10px;
+}
+
+#photo-category {
+    font-size: 14px; 
+}
+
+
+
+
+
+
+
+
 
 
 

@@ -124,9 +124,9 @@
     <div class="modal-container">
         <div class="overlay modal-trigger"></div>
 
-        <div class="modal">
-            <div class="modal-close">
-                <button class="cross-close modal-trigger"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal" id="gallery-view" style="display: block;">
+            <div class="modal-head">
+                <button class="head-icon modal-trigger"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <div class="modal-content">
@@ -134,8 +134,46 @@
 
                 <div class="photo-list"></div>
     
-                <button id="addImgButton">Ajouter une photo</button>
+                <button id="add-img-button">Ajouter une photo</button>
             </div>
+        </div>
+
+        <div class="modal" id="add-photo-view" style="display: none;">
+            <div class="modal-head">
+                <button class="head-icon" id="goto-former-modal"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="head-icon modal-trigger"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="modal-content">
+                <h3>Ajout photo</h3>
+
+                <form action="" method="post" id="add-photo-form">
+                    <div class="upload-photo">
+                        <i class="fa-regular fa-image"></i>
+                        <label for="photo-file">+ Ajouter photo</label>
+                        <input type="file" name="file" id="photo-file" accept="image/png, image/jpeg" onchange="checkFileSize(this)" hidden>
+                        <p>jpg, png : 4mo max</p>
+                    </div>
+                    
+                    <div class="input-area">
+                        <label>Titre</label>
+                        <input type="text" name="text" id="photo-title" value="Malt & Juniper - New York">  <!-- DEV VALUE -->
+                    </div>
+
+                    <div class="input-area">
+                        <label>Catégorie</label>
+                        <select name="category" id="photo-category">
+                            <option disabled selected value style="display:none"></option>
+                            <option value="Objets">Objets</option>
+                            <option value="Appartements">Appartements</option>
+                            <option value="Hotels & restaurants">Hotels & restaurants</option>
+                        </select>
+                    </div>
+                </form>
+
+                <button id="add-img-button">Valider</button>
+            </div>
+            
         </div>
     </div>
 

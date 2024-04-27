@@ -93,6 +93,9 @@ worksFilters();
 document.querySelector(".title-and-edit button").addEventListener("click", () => {
     getWorksImages();
     document.querySelector(".modal-container").style.display = "flex";
+    document.getElementById("gallery-view").style.display = "block";
+    document.getElementById("add-photo-view").style.display = "none";
+    document.getElementById("add-photo-form").reset();
 })
 
 const modalCloseTriggers = document.querySelectorAll(".modal-trigger");
@@ -136,4 +139,33 @@ const modalWorksImages = function(imagesList) {
         iconContainer.appendChild(trashIcon);
         photosContainer.appendChild(card);
     })
+}
+
+document.getElementById("add-img-button").addEventListener("click", () => {
+    document.getElementById("gallery-view").style.display = "none";
+    document.getElementById("add-photo-view").style.display = "block";
+    document.getElementById("add-photo-form").reset();
+})
+
+document.getElementById("goto-former-modal").addEventListener("click", () => {
+    document.getElementById("gallery-view").style.display = "block";
+    document.getElementById("add-photo-view").style.display = "none";
+})
+
+const checkFileSize = function(input) {
+
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+    if (input.files && input.files[0]) {
+        const fileSize = input.files[0].size;
+        const maxSize = 4 * 1024 * 1024; 
+
+        console.log(fileSize, maxSize);
+
+        if (fileSize > maxSize) {
+            alert("La taille du fichier est trop grande. Veuillez sélectionner un fichier de taille inférieure à 4 Mo.");
+            // Réinitialiser la valeur de l'input file pour effacer le fichier sélectionné
+            input.value = '';
+        }
+    }
 }
