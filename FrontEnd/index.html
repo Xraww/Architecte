@@ -153,6 +153,8 @@
                         <label for="photo-file">+ Ajouter photo</label>
                         <input type="file" name="file" id="photo-file" accept="image/png, image/jpeg" onchange="checkFileSize(this)" hidden>
                         <p>jpg, png : 4mo max</p>
+
+                        <img id="previewImage" src="" alt="Aperçu de l'image" style="display:none;">
                     </div>
                     
                     <div class="input-area">
@@ -171,7 +173,7 @@
                     </div>
                 </form>
 
-                <button id="add-img-button">Valider</button>
+                <button id="submitForm">Valider</button>
             </div>
             
         </div>

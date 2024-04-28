@@ -89,20 +89,11 @@ displayWorks();
 worksFilters();
 
 ////// MODALE //////
-
-document.querySelector(".title-and-edit button").addEventListener("click", () => {
-    getWorksImages();
-    document.querySelector(".modal-container").style.display = "flex";
-    document.getElementById("gallery-view").style.display = "block";
-    document.getElementById("add-photo-view").style.display = "none";
-    document.getElementById("add-photo-form").reset();
-})
-
 const modalCloseTriggers = document.querySelectorAll(".modal-trigger");
 
 modalCloseTriggers.forEach(function(trigger) { 
     trigger.addEventListener("click", () => { 
-        document.querySelector(".modal-container").style.display = "none";
+        modaleDisplay(false);
     })
 })
 
@@ -119,7 +110,7 @@ const getWorksImages = function() {
 }
 
 const modalWorksImages = function(imagesList) {
-    document.querySelector(".modal-container").style.display = "flex";
+    modaleDisplay(true, true);
     const photosContainer = document.querySelector(".photo-list");
     photosContainer.innerHTML = "";
 
@@ -141,31 +132,88 @@ const modalWorksImages = function(imagesList) {
     })
 }
 
+document.querySelector(".title-and-edit button").addEventListener("click", () => {
+    getWorksImages();
+    modaleDisplay(true, true)
+})
+
+
 document.getElementById("add-img-button").addEventListener("click", () => {
-    document.getElementById("gallery-view").style.display = "none";
-    document.getElementById("add-photo-view").style.display = "block";
+    modaleDisplay(true, false);
     document.getElementById("add-photo-form").reset();
 })
 
 document.getElementById("goto-former-modal").addEventListener("click", () => {
-    document.getElementById("gallery-view").style.display = "block";
-    document.getElementById("add-photo-view").style.display = "none";
+    modaleDisplay(true, true);
 })
 
+const modaleDisplay = (displayModale, displayGallery, image) => {
+    const modal = document.querySelector(".modal-container");
+    const childs = document.querySelector(".upload-photo").children;
+    const galleryView = document.getElementById("gallery-view");
+    const addPhotoView = document.getElementById("add-photo-view");
+    const imagePreview = document.getElementById("previewImage");
+
+    if (displayModale) {
+        modal.style.display = "flex";
+
+        if (displayGallery) {
+            galleryView.style.display = "block";
+            addPhotoView.style.display = "none";
+        } else {
+            galleryView.style.display = "none";
+            addPhotoView.style.display = "block";
+
+            if (typeof image === "undefined") {
+                for (let i = 0; i < childs.length; i++) {
+                    if (childs[i].tagName !== "INPUT") childs[i].style.display = "block";
+                }
+
+                imagePreview.style.display = "none";
+                imagePreview.src = "";
+            } else {
+                for (let i = 0; i < childs.length; i++) {
+                    childs[i].style.display = "none";
+                }
+
+                imagePreview.style.display = "block";
+                imagePreview.src = image;
+            }
+        }
+    } else {
+        modal.style.display = "none";
+        document.getElementById("add-photo-form").reset();
+        imagePreview.style.display = "none";
+        imagePreview.src = "";
+    }
+}
+
 const checkFileSize = function(input) {
-
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
     if (input.files && input.files[0]) {
         const fileSize = input.files[0].size;
         const maxSize = 4 * 1024 * 1024; 
 
-        console.log(fileSize, maxSize);
-
         if (fileSize > maxSize) {
             alert("La taille du fichier est trop grande. Veuillez sélectionner un fichier de taille inférieure à 4 Mo.");
-            // Réinitialiser la valeur de l'input file pour effacer le fichier sélectionné
-            input.value = '';
+            input.value = "";
         }
     }
 }
+
+document.getElementById("photo-file").addEventListener("change", function() {
+    const file = this.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+
+            const childs = document.querySelector(".upload-photo").children;
+            for (let i = 0; i < childs.length; i++) {
+                childs[i].style.display = "none";
+            }
+
+            modaleDisplay(true, false, event.target.result)
+        };
+        reader.readAsDataURL(file);
+    }
+});
