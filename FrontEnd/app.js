@@ -72,7 +72,6 @@ function buttonEventClick() {
     });
 }
 
-
 function showWorkByCategory(category) {
     const allWorks = document.querySelectorAll(".work")
     
@@ -98,30 +97,31 @@ modalCloseTriggers.forEach(function(trigger) {
 })
 
 const getWorksImages = function() {
-    let images =  [];
+    let images = [];
 
     fetch("http://localhost:5678/api/works").then(works => works.json()).then(data => {
         data.forEach(function(work) {
-            images.push(work.imageUrl);
+            images.push({id: work.id, image: work.imageUrl});
         })
 
         modalWorksImages(images);
     })
 }
 
-const modalWorksImages = function(imagesList) {
+const modalWorksImages = function(work) {
     modaleDisplay(true, true);
     const photosContainer = document.querySelector(".photo-list");
     photosContainer.innerHTML = "";
 
-    imagesList.forEach(function(img) {
+    for (i = 0; i < work.length; i++) {
         let card = document.createElement("div");
         let photo = document.createElement("img");
         let iconContainer = document.createElement("div");
         let trashIcon = document.createElement("i");
 
         card.classList.add("photo-card");
-        photo.src = img;
+        card.id = `work-${work[i].id}`;
+        photo.src = work[i].image;
         trashIcon.classList.add("fa-solid", "fa-trash-can");
         iconContainer.classList.add("icon-container");
 
@@ -129,6 +129,21 @@ const modalWorksImages = function(imagesList) {
         card.appendChild(iconContainer);
         iconContainer.appendChild(trashIcon);
         photosContainer.appendChild(card);
+    }
+
+    const token = sessionStorage.getItem("token");
+    const deleteIcons = document.querySelectorAll(".photo-card .icon-container");
+    deleteIcons.forEach(function(btn) {
+        btn.addEventListener("click", function(event) {
+            // event.preventDefault();
+            const parent = this.parentNode;
+            const workId = parent.id.split('-')[1];
+
+            fetch(`http://localhost:5678/api/works/${workId}`, {
+                method: "DELETE",
+                headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`},
+            });
+        })
     })
 }
 
@@ -136,7 +151,6 @@ document.querySelector(".title-and-edit button").addEventListener("click", () =>
     getWorksImages();
     modaleDisplay(true, true)
 })
-
 
 document.getElementById("add-img-button").addEventListener("click", () => {
     modaleDisplay(true, false);

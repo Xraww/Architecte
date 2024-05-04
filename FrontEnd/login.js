@@ -1,8 +1,7 @@
 // email: sophie.bluel@test.tld
 // password: S0phie
 
-const form = document.querySelector("form");
-let token;
+const form = document.getElementById("login-form");
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -23,7 +22,7 @@ form.addEventListener("submit", (event) => {
             body: JSON.stringify({email: userEmail, password: userPassword})
         }).then((rep) => rep.json()).then((data) => {
             if (data.token !== undefined) {
-                token = data.token;
+                sessionStorage.setItem("token", data.token);
                 window.location.href = "index.html";
             } else {
                 errorMsg.style.display = "block";
