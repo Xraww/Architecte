@@ -1,6 +1,6 @@
 async function displayWorks() {
     const works = await fetch("http://localhost:5678/api/works").then(works => works.json());
-    const gallery = document.querySelector(".gallery")
+    const gallery = document.querySelector(".gallery");
     gallery.innerHTML = "";
     
     for (let i = 0; i < works.length; i++) {
@@ -52,7 +52,7 @@ async function worksFilters() {
         buttonsDiv.appendChild(button);
     }
 
-    buttonEventClick()
+    buttonEventClick();
 }
 
 function buttonEventClick() {
@@ -135,14 +135,20 @@ const modalWorksImages = function(work) {
     const deleteIcons = document.querySelectorAll(".photo-card .icon-container");
     deleteIcons.forEach(function(btn) {
         btn.addEventListener("click", function(event) {
-            // event.preventDefault();
+            event.preventDefault();
+
             const parent = this.parentNode;
             const workId = parent.id.split('-')[1];
 
             fetch(`http://localhost:5678/api/works/${workId}`, {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`},
-            });
+            }).then(result => {
+                // console.log(result);
+                btn.parentNode.remove();
+                displayWorks();
+                document.querySelector('[data-category="Tous"]').click();
+            })
         })
     })
 }
