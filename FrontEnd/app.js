@@ -144,7 +144,6 @@ const modalWorksImages = function(work) {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`},
             }).then(result => {
-                // console.log(result);
                 btn.parentNode.remove();
                 displayWorks();
                 document.querySelector('[data-category="Tous"]').click();
@@ -191,6 +190,7 @@ const modaleDisplay = (displayModale, displayGallery, image) => {
 
                 imagePreview.style.display = "none";
                 imagePreview.src = "";
+                document.getElementById("errorMsg").style.display = "none";
             } else {
                 for (let i = 0; i < childs.length; i++) {
                     childs[i].style.display = "none";
@@ -237,3 +237,59 @@ document.getElementById("photo-file").addEventListener("change", function() {
         reader.readAsDataURL(file);
     }
 });
+
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
+
+document.getElementById("submitForm").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const categories = {1: "Objets", 2: "Appartements", 3: "Hotels & restaurants"};
+
+    const image = document.getElementById("photo-file").files[0];
+    const title = document.getElementById("photo-title").value;
+    const category = parseInt(getKeyByValue(categories, document.getElementById("photo-category").value));
+    
+    if (image) {
+        formData.append("image", image);
+    }
+
+    if (title !== "" && title !== undefined && title !== null) {
+        formData.append("title", title);
+    }
+
+    if (category !== "" && category !== undefined && category !== null) {
+        formData.append("category", category);
+    }
+
+    const token = sessionStorage.getItem("token");
+    fetch("http://localhost:5678/api/works", {
+        method: 'POST',
+        body: formData,
+        headers: {'Authorization': `Bearer ${token}`},
+    }).then(response => {
+        if (!response.ok) {
+            document.getElementById("errorMsg").style.display = "block";
+            throw new Error('Erreur HTTP ' + response.status);
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Réponse du serveur :', data);
+        
+        modaleDisplay(false);
+        let figure = document.createElement("figure");
+        let img = document.createElement("img");
+        let caption = document.createElement("figcaption");
+
+        figure.classList.add("work");
+        figure.setAttribute("data-category", categories[data.categoryId]);
+        img.src = data.imageUrl;
+        caption.innerText = data.title;
+
+        document.querySelector(".gallery").appendChild(figure);
+        figure.appendChild(img);
+        figure.appendChild(caption);
+    });
+})

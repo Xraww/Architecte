@@ -147,24 +147,24 @@
             <div class="modal-content">
                 <h3>Ajout photo</h3>
 
-                <form action="" method="post" id="add-photo-form">
+                <form method="post" id="add-photo-form">
                     <div class="upload-photo">
                         <i class="fa-regular fa-image"></i>
                         <label for="photo-file">+ Ajouter photo</label>
-                        <input type="file" name="file" id="photo-file" accept="image/png, image/jpeg" onchange="checkFileSize(this)" hidden>
+                        <input type="file" name="file" id="photo-file" accept="image/png, image/jpeg" onchange="checkFileSize(this)" hidden> <!-- DEV VALUE -->
                         <p>jpg, png : 4mo max</p>
 
-                        <img id="previewImage" src="" alt="Aperçu de l'image" style="display:none;">
+                        <img id="previewImage" alt="Aperçu de l'image" style="display:none;">
                     </div>
                     
                     <div class="input-area">
                         <label>Titre</label>
-                        <input type="text" name="text" id="photo-title" value="Malt & Juniper - New York">  <!-- DEV VALUE -->
+                        <input type="text" name="text" id="photo-title">  <!-- DEV VALUE -->
                     </div>
 
                     <div class="input-area">
                         <label>Catégorie</label>
-                        <select name="category" id="photo-category">
+                        <select name="category" id="photo-category"> <!-- DEV VALUE -->
                             <option disabled selected value style="display:none"></option>
                             <option value="Objets">Objets</option>
                             <option value="Appartements">Appartements</option>
@@ -174,6 +174,8 @@
                 </form>
 
                 <button id="submitForm">Valider</button>
+
+                <p id="errorMsg">Veuillez à bien remplir le formulaire avant de valider !</p>
             </div>
             
         </div>
