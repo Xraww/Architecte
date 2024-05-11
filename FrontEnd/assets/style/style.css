@@ -451,7 +451,7 @@ h3 {
     background-color: #A7A7A7;
 }
 
-.enabledButton, #add-img-button {
+.enabledButton, #add-img-button, input[type="submit"] {
     background-color: #1D6154;
 }
 
