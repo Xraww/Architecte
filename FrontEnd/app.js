@@ -20,7 +20,6 @@ async function displayWorks() {
 }
 
 async function worksFilters() {
-    // Récupération des catégories
     let categories = ["Tous"];
 
     await fetch("http://localhost:5678/api/categories")
@@ -31,17 +30,15 @@ async function worksFilters() {
         }
     }); 
 
-    // Création du container des bouttons
     const buttonsDiv = document.createElement("div");
     buttonsDiv.classList.add("filters-buttons")
     const elementBefore = document.querySelector("#portfolio .title-and-edit")
 
-    // Ajout de ma division juste après le h2
+    // Ajout de ma division juste après la div "title & edit"
     if (elementBefore) {
         elementBefore.parentNode.insertBefore(buttonsDiv, elementBefore.nextSibling);
     }
 
-    // Création des boutton et event click
     for (i = 0; i < categories.length; i++) {
         let button = document.createElement("button");
         button.classList.add("filters-button");
@@ -65,8 +62,6 @@ function buttonEventClick() {
             })
 
             button.classList.add("active-button");
-
-            // Affichage des travaux selon la catégorie
             showWorkByCategory(button.getAttribute("data-category"));
         });
     });
@@ -191,6 +186,8 @@ const modaleDisplay = (displayModale, displayGallery, image) => {
                 imagePreview.style.display = "none";
                 imagePreview.src = "";
                 document.getElementById("errorMsg").style.display = "none";
+                document.getElementById("submitForm").classList.remove("enabledButton");
+                document.getElementById("submitForm").classList.add("disabledButton");
             } else {
                 for (let i = 0; i < childs.length; i++) {
                     childs[i].style.display = "none";
@@ -238,6 +235,20 @@ document.getElementById("photo-file").addEventListener("change", function() {
     }
 });
 
+document.getElementById("add-photo-form").addEventListener("change", function() {
+    const img = document.getElementById("previewImage");
+    const title = document.getElementById("photo-title");
+    const category = document.getElementById("photo-category");
+    
+    if ((img.src === "" || img.src === "file:///c%3A/Users/Xraww/Desktop/Projets/3/Architecte/FrontEnd/index.html") || title.value === "" || category.value === "") {
+        document.getElementById("submitForm").classList.remove("enabledButton");
+        document.getElementById("submitForm").classList.add("disabledButton");
+    } else {
+        document.getElementById("submitForm").classList.add("enabledButton");
+        document.getElementById("submitForm").classList.remove("disabledButton");
+    }
+})
+
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
@@ -252,15 +263,9 @@ document.getElementById("submitForm").addEventListener("click", function(e) {
     const title = document.getElementById("photo-title").value;
     const category = parseInt(getKeyByValue(categories, document.getElementById("photo-category").value));
     
-    if (image) {
+    if (image && (title !== "" && title !== undefined && title !== null) && (category !== "" && category !== undefined && category !== null)) {
         formData.append("image", image);
-    }
-
-    if (title !== "" && title !== undefined && title !== null) {
         formData.append("title", title);
-    }
-
-    if (category !== "" && category !== undefined && category !== null) {
         formData.append("category", category);
     }
 

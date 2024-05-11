@@ -124,7 +124,7 @@
     <div class="modal-container">
         <div class="overlay modal-trigger"></div>
 
-        <div class="modal" id="gallery-view" style="display: block;">
+        <div class="modal" id="gallery-view">
             <div class="modal-head">
                 <button class="head-icon modal-trigger"><i class="fa-solid fa-xmark"></i></button>
             </div>
@@ -151,7 +151,7 @@
                     <div class="upload-photo">
                         <i class="fa-regular fa-image"></i>
                         <label for="photo-file">+ Ajouter photo</label>
-                        <input type="file" name="file" id="photo-file" accept="image/png, image/jpeg" onchange="checkFileSize(this)" hidden> <!-- DEV VALUE -->
+                        <input type="file" name="file" id="photo-file" accept="image/png, image/jpeg" onchange="checkFileSize(this)" hidden>
                         <p>jpg, png : 4mo max</p>
 
                         <img id="previewImage" alt="Aperçu de l'image" style="display:none;">
@@ -159,12 +159,12 @@
                     
                     <div class="input-area">
                         <label>Titre</label>
-                        <input type="text" name="text" id="photo-title">  <!-- DEV VALUE -->
+                        <input type="text" name="text" id="photo-title">
                     </div>
 
                     <div class="input-area">
                         <label>Catégorie</label>
-                        <select name="category" id="photo-category"> <!-- DEV VALUE -->
+                        <select name="category" id="photo-category">
                             <option disabled selected value style="display:none"></option>
                             <option value="Objets">Objets</option>
                             <option value="Appartements">Appartements</option>
@@ -173,7 +173,7 @@
                     </div>
                 </form>
 
-                <button id="submitForm">Valider</button>
+                <button id="submitForm" class="disabledButton">Valider</button>
 
                 <p id="errorMsg">Veuillez à bien remplir le formulaire avant de valider !</p>
             </div>

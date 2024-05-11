@@ -189,6 +189,7 @@ main {
 	font-weight: 700;
 	font-size: 16px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .active-button {
@@ -208,6 +209,8 @@ main {
 	width: 100%;
     height: 100%;
 }
+
+
 
 #errorMsg {
     display: none;
@@ -259,7 +262,6 @@ input[type="submit"], #add-img-button, #submitForm {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
@@ -326,8 +328,6 @@ footer nav ul {
     flex-direction: column;
     align-items: center;
     gap: 30px;
-
-    /* border: 1px solid blue; */
 }
 
 /* Modal view 2 : Ad Photo */
@@ -339,8 +339,6 @@ footer nav ul {
 
     padding-bottom: 30px;
     border-bottom: 1px solid #B3B3B3;
-
-    /* border: 1px solid red; */
 }
 
 h3 {
@@ -350,7 +348,6 @@ h3 {
 
 .photo-list {
     width: 80%;
-    /* max-height: 50vh; */
     overflow-y: auto;
 
     display: flex;
@@ -360,8 +357,6 @@ h3 {
     padding-right: 5px;
     padding-bottom: 50px;
     border-bottom: 1px solid #B3B3B3;
-
-    /* border: 1px solid red; */
 }
 
 .photo-card {
@@ -452,15 +447,13 @@ h3 {
     font-size: 14px; 
 }
 
+.disabledButton {
+    background-color: #A7A7A7;
+}
 
-
-
-
-
-
-
-
-
+.enabledButton, #add-img-button {
+    background-color: #1D6154;
+}
 
 /* SCROLLBAR PHOTO-LIST */
 .photo-list::-webkit-scrollbar {

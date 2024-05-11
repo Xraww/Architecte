@@ -1,6 +1,3 @@
-// email: sophie.bluel@test.tld
-// password: S0phie
-
 const form = document.getElementById("login-form");
 
 form.addEventListener("submit", (event) => {
