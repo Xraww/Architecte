@@ -1,3 +1,13 @@
+document.addEventListener("DOMContentLoaded", function() {
+    if (sessionStorage.getItem("token") === null) {
+        document.querySelector(".edit-bar").style.display = "none";
+        document.querySelector("#editButton").style.display = "none";
+    } else {
+        document.querySelector(".edit-bar").style.display = "flex";
+        document.querySelector("#editButton").style.display = "block";
+    }
+});
+
 async function displayWorks() {
     const works = await fetch("http://localhost:5678/api/works").then(works => works.json());
     const gallery = document.querySelector(".gallery");
