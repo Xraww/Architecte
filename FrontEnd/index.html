@@ -16,17 +16,18 @@
 </head>
 <body>
     <header>
-        <div class="edit-bar" style="display: none;">
+        <div class="edit-bar">
             <i class="fa-regular fa-pen-to-square"></i><p>Mode édition</p>
         </div>
 
         <div class="navbar">
             <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+            
             <nav>
                 <ul>
-                    <li>projets</li>
-                    <li>contact</li>
-                    <li>login</li>
+                    <li><a href="#portfolio">projets</a></li>
+                    <li><a href="#contact">contact</a></li>
+                    <li><a id="login" href="login.html">login</a></li>
                     <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
                 </ul>
             </nav>
@@ -45,10 +46,11 @@
                 <p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
             </article>
         </section>
+
         <section id="portfolio">
             <div class="title-and-edit">
                 <h2>Mes Projets</h2>
-                <button id="editButton" style="display: none;"><i class="fa-regular fa-pen-to-square"></i> modifier</button>
+                <button id="editButton"><i class="fa-regular fa-pen-to-square"></i> modifier</button>
             </div>
 
             <div class="gallery">
@@ -56,51 +58,63 @@
                     <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
                     <figcaption>Abajour Tahina</figcaption>
                 </figure>
+
                 <figure>
                     <img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
                     <figcaption>Appartement Paris V</figcaption>
                 </figure>
+
                 <figure>
                     <img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
                     <figcaption>Restaurant Sushisen - Londres</figcaption>
                 </figure>
+
                 <figure>
                     <img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
                     <figcaption>Villa “La Balisiere” - Port Louis</figcaption>
                 </figure>
+
                 <figure>
                     <img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
                     <figcaption>Structures Thermopolis</figcaption>
                 </figure>
+
                 <figure>
                     <img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
                     <figcaption>Appartement Paris X</figcaption>
                 </figure>
+
                 <figure>
                     <img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
                     <figcaption>Pavillon “Le coteau” - Cassis</figcaption>
                 </figure>
+
                 <figure>
-                    <img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-                    <figcaption>Villa Ferneze - Isola d’Elba</figcaption>
+                    <img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d'Elba">
+                    <figcaption>Villa Ferneze - Isola d'Elba</figcaption>
                 </figure>
+
                 <figure>
                     <img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
                     <figcaption>Appartement Paris XVIII</figcaption>
                 </figure>
+
                 <figure>
                     <img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
                     <figcaption>Bar “Lullaby” - Paris</figcaption>
                 </figure>
+
                 <figure>
                     <img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
                     <figcaption>Hotel First Arte - New Delhi</figcaption>
                 </figure>
             </div>
         </section>
+
         <section id="contact">
             <h2>Contact</h2>
             <p>Vous avez un projet ? Discutons-en !</p>
+            
             <form action="#" method="post">
                 <label for="name">Nom</label>
                 <input type="text" name="name" id="name">
@@ -134,11 +148,11 @@
 
                 <div class="photo-list"></div>
     
-                <button id="add-img-button">Ajouter une photo</button>
+                <button id="addImgButton">Ajouter une photo</button>
             </div>
         </div>
 
-        <div class="modal" id="add-photo-view" style="display: none;">
+        <div class="modal" id="addPhotoView">
             <div class="modal-head">
                 <button class="head-icon" id="goto-former-modal"><i class="fa-solid fa-arrow-left"></i></button>
                 <button class="head-icon modal-trigger"><i class="fa-solid fa-xmark"></i></button>
@@ -154,7 +168,7 @@
                         <input type="file" name="file" id="photo-file" accept="image/png, image/jpeg" onchange="checkFileSize(this)" hidden>
                         <p>jpg, png : 4mo max</p>
 
-                        <img id="previewImage" alt="Aperçu de l'image" style="display:none;">
+                        <img id="imagePreview" alt="Aperçu de l'image">
                     </div>
                     
                     <div class="input-area">
@@ -164,7 +178,7 @@
 
                     <div class="input-area">
                         <label>Catégorie</label>
-                        <select name="category" id="photo-category">
+                        <select name="category" id="photoCategory">
                             <option disabled selected value style="display:none"></option>
                             <option value="Objets">Objets</option>
                             <option value="Appartements">Appartements</option>

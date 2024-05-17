@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function() {
+    sessionStorage.removeItem("token");
+});
+
 const form = document.getElementById("login-form");
 
 form.addEventListener("submit", (event) => {

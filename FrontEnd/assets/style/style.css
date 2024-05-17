@@ -53,6 +53,7 @@ table {
 }
 
 /** end reset css**/
+
 body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -61,7 +62,7 @@ body {
 .edit-bar {
     background-color: black;
     color: white;
-    display: flex; 
+    display: none; 
     font-size: 16px;
     height: 60px;
 
@@ -114,7 +115,13 @@ nav li {
 	font-size: 1.2em;
 }
 
+nav li a {
+    color: inherit;
+    text-decoration: none;
+}
+
 li:hover {
+    cursor: pointer;
 	color: #B1663C;
 }
 
@@ -170,6 +177,8 @@ main {
 
     font-family: 'Work Sans';
 	font-size: 14px;
+
+    display: none;
 }
 
 .filters-buttons {
@@ -210,8 +219,6 @@ main {
     height: 100%;
 }
 
-
-
 #errorMsg {
     display: none;
     color: red;
@@ -238,7 +245,7 @@ main {
 	flex-direction: column;
 }
 
-#contact input, .input-area input, #photo-category {
+#contact input, .input-area input, #photoCategory {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -258,7 +265,7 @@ main {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"], #add-img-button, #submitForm {
+input[type="submit"], #addImgButton, #submitForm {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -274,8 +281,7 @@ footer nav ul {
 	margin: 2em
 }
 
-
-/* Modal Style */
+/* Modal */
 .modal-container {
     position: fixed;
     top: 0;
@@ -309,7 +315,11 @@ footer nav ul {
     padding: 20px;
 }
 
-#add-photo-view .modal-head {
+#addPhotoView {
+    display: none;
+}
+
+#addPhotoView .modal-head {
     justify-content: space-between;
 }
 
@@ -330,7 +340,7 @@ footer nav ul {
     gap: 30px;
 }
 
-/* Modal view 2 : Ad Photo */
+/* Modal view 2 : Add Photo */
 .modal-content form {
     display: flex;
     flex-direction: column;
@@ -392,7 +402,7 @@ h3 {
     font-size: 10px;
 }
 
-#add-img-button, #submitForm {
+#addImgButton, #submitForm {
     padding: 10px;
     margin: 0;
     border: none;
@@ -437,13 +447,14 @@ h3 {
     font-size: 10px;
 }
 
-.upload-photo #previewImage {
+#imagePreview {
     width: 30%;
     height: 100%;
     object-fit: cover;
+    display: none;
 }
 
-#photo-category {
+#photoCategory {
     font-size: 14px; 
 }
 
@@ -451,12 +462,12 @@ h3 {
     background-color: #A7A7A7;
 }
 
-.enabledButton, #add-img-button, input[type="submit"] {
+.enabledButton, #addImgButton, input[type="submit"] {
     background-color: #1D6154;
 }
 
-/* SCROLLBAR PHOTO-LIST */
-.photo-list::-webkit-scrollbar {
+/* SCROLLBAR PHOTO-LIST IF NEEDED */
+/* .photo-list::-webkit-scrollbar {
     width: 10px;
 }
 .photo-list::-webkit-scrollbar-track {
@@ -466,4 +477,4 @@ h3 {
 .photo-list::-webkit-scrollbar-thumb {
     background: #B3B3B3;
     border-radius: 10px;
-}
+} */

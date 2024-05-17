@@ -2,10 +2,16 @@ document.addEventListener("DOMContentLoaded", function() {
     if (sessionStorage.getItem("token") === null) {
         document.querySelector(".edit-bar").style.display = "none";
         document.querySelector("#editButton").style.display = "none";
+
+        document.getElementById("login").innerText = "login";
     } else {
         document.querySelector(".edit-bar").style.display = "flex";
         document.querySelector("#editButton").style.display = "block";
+
+        document.getElementById("login").innerText = "logout";
     }
+
+    console.log(sessionStorage.getItem("token"));
 });
 
 async function displayWorks() {
@@ -113,20 +119,20 @@ const getWorksImages = function() {
     })
 }
 
-const modalWorksImages = function(work) {
+const modalWorksImages = function(works) {
     modaleDisplay(true, true);
     const photosContainer = document.querySelector(".photo-list");
     photosContainer.innerHTML = "";
 
-    for (i = 0; i < work.length; i++) {
+    for (i = 0; i < works.length; i++) {
         let card = document.createElement("div");
         let photo = document.createElement("img");
         let iconContainer = document.createElement("div");
         let trashIcon = document.createElement("i");
 
         card.classList.add("photo-card");
-        card.id = `work-${work[i].id}`;
-        photo.src = work[i].image;
+        card.id = `work-${works[i].id}`;
+        photo.src = works[i].image;
         trashIcon.classList.add("fa-solid", "fa-trash-can");
         iconContainer.classList.add("icon-container");
 
@@ -162,7 +168,7 @@ document.querySelector(".title-and-edit button").addEventListener("click", () =>
     modaleDisplay(true, true)
 })
 
-document.getElementById("add-img-button").addEventListener("click", () => {
+document.getElementById("addImgButton").addEventListener("click", () => {
     modaleDisplay(true, false);
     document.getElementById("add-photo-form").reset();
 })
@@ -175,8 +181,8 @@ const modaleDisplay = (displayModale, displayGallery, image) => {
     const modal = document.querySelector(".modal-container");
     const childs = document.querySelector(".upload-photo").children;
     const galleryView = document.getElementById("gallery-view");
-    const addPhotoView = document.getElementById("add-photo-view");
-    const imagePreview = document.getElementById("previewImage");
+    const addPhotoView = document.getElementById("addPhotoView");
+    const imagePreview = document.getElementById("imagePreview");
 
     if (displayModale) {
         modal.style.display = "flex";
@@ -246,9 +252,9 @@ document.getElementById("photo-file").addEventListener("change", function() {
 });
 
 document.getElementById("add-photo-form").addEventListener("change", function() {
-    const img = document.getElementById("previewImage");
+    const img = document.getElementById("imagePreview");
     const title = document.getElementById("photo-title");
-    const category = document.getElementById("photo-category");
+    const category = document.getElementById("photoCategory");
     
     if ((img.src === "" || img.src === "file:///c%3A/Users/Xraww/Desktop/Projets/3/Architecte/FrontEnd/index.html") || title.value === "" || category.value === "") {
         document.getElementById("submitForm").classList.remove("enabledButton");
@@ -271,7 +277,7 @@ document.getElementById("submitForm").addEventListener("click", function(e) {
 
     const image = document.getElementById("photo-file").files[0];
     const title = document.getElementById("photo-title").value;
-    const category = parseInt(getKeyByValue(categories, document.getElementById("photo-category").value));
+    const category = parseInt(getKeyByValue(categories, document.getElementById("photoCategory").value));
     
     if (image && (title !== "" && title !== undefined && title !== null) && (category !== "" && category !== undefined && category !== null)) {
         formData.append("image", image);
